@@ -14,8 +14,10 @@ namespace HouseBasements
 
 		internal static void SetBasementVisibility()
 		{
-			if (basements == null) return;
-			else basements.SetActive(!instance.disableBasements);
+			if (basements != null)
+			{
+				basements.SetActive(!instance.disableBasements);
+			}
 		}
 
 		protected override void OnConfirm()
