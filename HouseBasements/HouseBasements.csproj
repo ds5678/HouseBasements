@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<LangVersion>Latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="res\housebasements" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>E:\Games\TLD400\MelonLoader\0Harmony.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Il2CppSystem">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="MelonLoader">
+			<HintPath>E:\Games\TLD400\MelonLoader\MelonLoader.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="ModSettings">
+			<HintPath>E:\Games\TLD400\Mods\ModSettings.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnhollowerBaseLib">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>E:\Games\TLD400\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+</Project>
