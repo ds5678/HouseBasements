@@ -1,29 +1,31 @@
 ﻿using ModSettings;
-using UnityEngine;
 
 namespace HouseBasements
 {
 	internal class Settings : JsonModSettings
 	{
-		internal readonly static Settings instance = new Settings();
-		internal static GameObject basements;
+		internal static Settings Instance { get; } = new();
 
 		[Name("Disable Basements")]
 		[Description("Don't disable this while you're inside a basement. It could drop you out of the world.")]
 		public bool disableBasements = false;
 
-		internal static void SetBasementVisibility()
+		private GameObject? basements;
+
+		public GameObject? Basements
 		{
-			if (basements != null)
+			get => basements;
+			set
 			{
-				basements.SetActive(!instance.disableBasements);
+				basements = value;
+				basements?.SetActive(!disableBasements);
 			}
 		}
 
 		protected override void OnConfirm()
 		{
 			base.OnConfirm();
-			SetBasementVisibility();
+			basements?.SetActive(!disableBasements);
 		}
 	}
 }

@@ -1,32 +1,35 @@
 ﻿using MelonLoader;
 using System.IO;
 using System.Reflection;
-using UnityEngine;
 
 namespace HouseBasements
 {
-	public class Implementation : MelonMod
+	public sealed class Implementation : MelonMod
 	{
-		internal static AssetBundle assetBundle;
+		private static AssetBundle? assetBundle;
+
+		internal static AssetBundle LoadedAssetBundle
+		{
+			get => assetBundle ?? throw new System.NullReferenceException(nameof(assetBundle));
+		}
+
 		public override void OnApplicationStart()
 		{
 			assetBundle = LoadEmbeddedAssetBundle("HouseBasements.res.housebasements");
 #if DEBUG
 			ListContents(assetBundle);
 #endif
-			Settings.instance.AddToModSettings("House Basements");
+			Settings.Instance.AddToModSettings("House Basements");
 		}
 
 		private static AssetBundle LoadEmbeddedAssetBundle(string path)
 		{
-			using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path))
-			{
-				MemoryStream memoryStream = new MemoryStream((int)stream.Length);
-				stream.CopyTo(memoryStream);
-				return memoryStream.Length != 0
-					? AssetBundle.LoadFromMemory(memoryStream.ToArray())
-					: throw new System.Exception("No data loaded!");
-			}
+			using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+			MemoryStream memoryStream = new MemoryStream((int)stream.Length);
+			stream.CopyTo(memoryStream);
+			return memoryStream.Length != 0
+				? AssetBundle.LoadFromMemory(memoryStream.ToArray())
+				: throw new System.Exception("No data loaded!");
 		}
 
 		private void ListContents(AssetBundle assetBundle)

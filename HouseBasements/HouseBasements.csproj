@@ -25,6 +25,7 @@
 		<Reference Include="Assembly-CSharp">
 			<HintPath>E:\Games\TLD400\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
 			<Private>False</Private>
+			<Aliases>Hinterland</Aliases>
 		</Reference>
 		<Reference Include="Il2Cppmscorlib">
 			<HintPath>E:\Games\TLD400\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
