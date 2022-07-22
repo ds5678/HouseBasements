@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace HouseBasements;
 
-public sealed class Implementation : MelonMod
+internal sealed class Implementation : MelonMod
 {
 	private static AssetBundle? assetBundle;
 
@@ -20,6 +20,8 @@ public sealed class Implementation : MelonMod
 		ListContents(assetBundle);
 #endif
 		Settings.Instance.AddToModSettings("House Basements");
+
+		RerollCommand.RegisterCommand();
 	}
 
 	private static AssetBundle LoadEmbeddedAssetBundle(string path)
