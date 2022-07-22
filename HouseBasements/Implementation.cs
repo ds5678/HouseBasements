@@ -2,42 +2,41 @@
 using System.IO;
 using System.Reflection;
 
-namespace HouseBasements
+namespace HouseBasements;
+
+public sealed class Implementation : MelonMod
 {
-	public sealed class Implementation : MelonMod
+	private static AssetBundle? assetBundle;
+
+	internal static AssetBundle LoadedAssetBundle
 	{
-		private static AssetBundle? assetBundle;
+		get => assetBundle ?? throw new System.NullReferenceException(nameof(assetBundle));
+	}
 
-		internal static AssetBundle LoadedAssetBundle
-		{
-			get => assetBundle ?? throw new System.NullReferenceException(nameof(assetBundle));
-		}
-
-		public override void OnApplicationStart()
-		{
-			assetBundle = LoadEmbeddedAssetBundle("HouseBasements.res.housebasements");
+	public override void OnApplicationStart()
+	{
+		assetBundle = LoadEmbeddedAssetBundle("HouseBasements.res.housebasements");
 #if DEBUG
-			ListContents(assetBundle);
+		ListContents(assetBundle);
 #endif
-			Settings.Instance.AddToModSettings("House Basements");
-		}
+		Settings.Instance.AddToModSettings("House Basements");
+	}
 
-		private static AssetBundle LoadEmbeddedAssetBundle(string path)
-		{
-			using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
-			MemoryStream memoryStream = new MemoryStream((int)stream.Length);
-			stream.CopyTo(memoryStream);
-			return memoryStream.Length != 0
-				? AssetBundle.LoadFromMemory(memoryStream.ToArray())
-				: throw new System.Exception("No data loaded!");
-		}
+	private static AssetBundle LoadEmbeddedAssetBundle(string path)
+	{
+		using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+		MemoryStream memoryStream = new MemoryStream((int)stream.Length);
+		stream.CopyTo(memoryStream);
+		return memoryStream.Length != 0
+			? AssetBundle.LoadFromMemory(memoryStream.ToArray())
+			: throw new System.Exception("No data loaded!");
+	}
 
-		private void ListContents(AssetBundle assetBundle)
+	private void ListContents(AssetBundle assetBundle)
+	{
+		foreach (string name in assetBundle.GetAllAssetNames())
 		{
-			foreach (string name in assetBundle.GetAllAssetNames())
-			{
-				LoggerInstance.Msg(name);
-			}
+			LoggerInstance.Msg(name);
 		}
 	}
 }
